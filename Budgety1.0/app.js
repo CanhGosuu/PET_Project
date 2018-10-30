@@ -66,9 +66,20 @@ var UIController = (function() {
     }
   };
 })();
-//GLOBAL APP CONTROLLER
+// GLOBAL APP CONTROLLER
 var controller = (function(budgetControl, UIControl) {
   var DOM = UIControl.getDOMstrings();
+
+  var ctrlAddItem = function() {
+    var input,
+      newItem,
+      // 1. Get the field input data
+      input = UIControl.getInput();
+    // 2. Add item to the bubget
+    newItem = budgetControl.addItem(input.type, input.description, input.value);
+    // 3. Add the item in the UI
+  };
+
   var setupEventListeners = function() {
     document.querySelector(DOM.inputBtn).addEventListener("click", function() {
       ctrlAddItem();
@@ -80,15 +91,6 @@ var controller = (function(budgetControl, UIControl) {
     });
   };
 
-  var ctrlAddItem = function() {
-    var input,
-      newItem,
-      // 1. Get the field input data
-      input = UIControl.getInput();
-    // 2. Add item to the bubget
-    newItem = budgetControl.addItem(input.type, input.description, input.value);
-    //Add the item in the UI
-  };
   return {
     init: function() {
       setupEventListeners();
